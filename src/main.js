@@ -12,13 +12,13 @@ class Main extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({ horns: data });
+  }
+  
   handleChange = (e) => {
     let current = this.state.horns.filter(horn => e.target.value === horn.title);
     this.setState({ selected: current[0] });
-  }
-
-  componentDidMount() {
-    this.setState({ horns: data });
   }
 
   render() {
