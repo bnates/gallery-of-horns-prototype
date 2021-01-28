@@ -7,13 +7,14 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      horns: []
+      horns: [],
+      selected: ''
     }
   }
 
   handleChange = (e) => {
     let current = this.state.horns.filter(horn => e.target.value === horn.title);
-    this.setState({ horns: current });
+    this.setState({ selected: current[0] });
   }
 
   componentDidMount() {
@@ -23,19 +24,32 @@ class Main extends React.Component {
   render() {
     return (
       <main>
-        <select onChange={this.handleChange}>
-          {data.map(horn => <option value={horn.title}>{horn.title}</option>)}
-        </select>
+        <section className="dropdown">
+          <h3>Select A Horn!</h3>
+
+          {/* TODO: Add ability to reset horns */}
+          <select onChange={this.handleChange}>
+            {data.map(horn => <option value={horn.title}>{horn.title}</option>)}
+          </select>
+        </section>
 
         <section className="images">
           <ul>
-            {this.state.horns.map(horn => {
-              return <li>
-                <h2>{horn.title}</h2>
-                <img src={horn.image_url} />
-                <p>{horn.description}</p>
-              </li>
-            })}
+            {!this.state.selected ? 
+              this.state.horns.map(horn => {
+                return <li>
+                  <h2>{horn.title}</h2>
+                  <img src={horn.image_url} />
+                  <p>{horn.description}</p>
+                </li>
+              })
+              :
+              <li>
+                <h2>{this.state.selected.title}</h2>
+                <img src={this.state.selected.image_url} />
+                <p>{this.state.selected.description}</p>
+              </li>          
+            }
           </ul>
         </section>
       </main>
