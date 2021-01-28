@@ -27,8 +27,8 @@ class Main extends React.Component {
         <section className="dropdown">
           <h3>Select A Horn!</h3>
 
-          {/* TODO: Add ability to reset horns */}
           <select onChange={this.handleChange}>
+            <option value="default">View All Horns</option>
             {data.map(horn => <option value={horn.title}>{horn.title}</option>)}
           </select>
         </section>
